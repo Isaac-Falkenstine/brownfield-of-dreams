@@ -7,6 +7,15 @@
     <li> <%= current_user.first_name  %> <%= current_user.last_name %> </li>
     <li> <%= current_user.email%> </li>
   </ul>
+  <section class="github">
+    <h1>GitHub</h1>
+      <h2>Repositories</h2>
+      <ul class="repositories">
+        <% @facade.repositories.each do |repo| %>
+          <li class="repository"><a href = <%= repo.url %> > <%= repo.name %></a></li>
+        <% end %>
+      </ul>
+  </section>
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
