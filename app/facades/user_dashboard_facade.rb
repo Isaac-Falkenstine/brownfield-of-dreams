@@ -16,6 +16,6 @@ class UserDashboardFacade
   end
 
   def service
-    GithubService.new
+    GithubService.new #(user.token)
   end
 end
