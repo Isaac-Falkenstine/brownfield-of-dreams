@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def show
+    @facade = UserDashboardFacade.new
   end
 
   def new
