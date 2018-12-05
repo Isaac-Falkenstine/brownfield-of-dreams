@@ -1,25 +1,18 @@
 class UserDashboardFacade
   def repos
-    binding.pry
-  end
-  def member_count
-    members.count
+    repo_array.first(5)
   end
 
-  def members
-    search_result[:results].map do |member_data|
-      Member.new(member_data)
+  def repo_array
+    search_result.map do |repo_data|
+      Repository.new({name: repo_data[:name], url: repo_data[:html_url]})
     end
-  end
-
-  def copyright
-    search_result[:copyright]
   end
 
   private
 
   def search_result
-    @_search_result ||= service.members_of_house
+    @search_result ||= service.repos_json
   end
 
   def service
