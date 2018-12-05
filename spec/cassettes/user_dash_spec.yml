@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - token 0ee4c4c8bf4c4b1dfd2157e6e691e0f0bb5237a9
+      -
       User-Agent:
       - Faraday v0.12.2
       Accept-Encoding:
