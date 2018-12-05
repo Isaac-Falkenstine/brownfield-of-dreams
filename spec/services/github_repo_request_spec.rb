@@ -14,7 +14,6 @@ describe GithubService do
           service = GithubService.new
 
           expect(service.repos).to be_a(Array)
-          expect(service.repos.count).to eq(5)
           expect(service.repos.first).to have_key(:name)
           expect(service.repos.first).to have_key(:html_url)
         end

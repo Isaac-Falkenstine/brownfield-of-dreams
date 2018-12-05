@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/user/repos
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<GITHUB_TOKEN>"
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 05 Dec 2018 02:23:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '121'
+      Status:
+      - 401 Unauthorized
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '56'
+      X-Ratelimit-Reset:
+      - '1543979349'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - E6EC:19FB:68106F:D5D3A3:5C073683
+    body:
+      encoding: UTF-8
+      string: '{"message":"Requires authentication","documentation_url":"https://developer.github.com/v3/repos/#list-your-repositories"}'
+    http_version: 
+  recorded_at: Wed, 05 Dec 2018 02:23:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/repos
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<GITHUB_TOKEN>"
+      User-Agent:
+      - Faraday v0.12.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 05 Dec 2018 02:23:01 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '121'
+      Status:
+      - 401 Unauthorized
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '55'
+      X-Ratelimit-Reset:
+      - '1543979349'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - E6ED:19F6:1CF5DD:4CABDA:5C073685
+    body:
+      encoding: UTF-8
+      string: '{"message":"Requires authentication","documentation_url":"https://developer.github.com/v3/repos/#list-your-repositories"}'
+    http_version: 
+  recorded_at: Wed, 05 Dec 2018 02:23:01 GMT
+recorded_with: VCR 4.0.0
