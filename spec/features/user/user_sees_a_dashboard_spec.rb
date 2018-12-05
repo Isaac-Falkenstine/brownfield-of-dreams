@@ -23,5 +23,9 @@ describe 'User' do
         expect(page).to have_css('.repository', count: 5)
       end
     end
+
+    it "should show the proper repositories with multiple users" do
+      
+    end
   end
 end
