@@ -1,11 +1,11 @@
 class UserDashboardFacade
-  def repos
+  def repositories
     repo_array.first(5)
   end
 
   def repo_array
     search_result.map do |repo_data|
-      Repository.new({name: repo_data[:name], url: repo_data[:html_url]})
+      Repository.new(name: repo_data[:name], url: repo_data[:html_url])
     end
   end
 

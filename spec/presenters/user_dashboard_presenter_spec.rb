@@ -6,8 +6,8 @@ describe UserDashboardFacade do
       VCR.use_cassette("user_dash_spec") do
         facade = UserDashboardFacade.new
 
-        expect(facade.repos.count).to eq(5)
-        expect(facade.repos.first).to be_a(Repository)
+        expect(facade.repositories.count).to eq(5)
+        expect(facade.repositories.first).to be_a(Repository)
       end
     end
   end

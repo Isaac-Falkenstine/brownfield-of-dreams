@@ -2,44 +2,50 @@ require 'rails_helper'
 
 describe 'User' do
   it 'user can sign in' do
-    user = create(:user)
+    VCR.use_cassette("user_sign_in_spec") do
 
-    visit '/'
+      user = create(:user)
 
-    click_on "Sign In"
+      visit '/'
 
-    expect(current_path).to eq(login_path)
+      click_on "Sign In"
 
-    fill_in 'session[email]', with: user.email
-    fill_in 'session[password]', with: user.password
+      expect(current_path).to eq(login_path)
 
-    click_on 'Log In'
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
 
-    expect(current_path).to eq(dashboard_path)
-    expect(page).to have_content(user.email)
-    expect(page).to have_content(user.first_name)
-    expect(page).to have_content(user.last_name)
+      click_on 'Log In'
+
+      expect(current_path).to eq(dashboard_path)
+      expect(page).to have_content(user.email)
+      expect(page).to have_content(user.first_name)
+      expect(page).to have_content(user.last_name)
+    end
   end
 
   it 'can log out', :js do
-    user = create(:user)
+    VCR.use_cassette("user_log_out_spec") do
 
-    visit login_path
+      user = create(:user)
 
-    fill_in'session[email]', with: user.email
-    fill_in'session[password]', with: user.password
+      visit login_path
 
-    click_on 'Log In'
+      fill_in'session[email]', with: user.email
+      fill_in'session[password]', with: user.password
 
-    click_on 'Profile'
+      click_on 'Log In'
 
-    expect(current_path).to eq(dashboard_path)
+      click_on 'Profile'
 
-    click_on 'Log Out'
+      expect(current_path).to eq(dashboard_path)
 
-    expect(current_path).to eq(root_path)
-    expect(page).to_not have_content(user.first_name)
-    expect(page).to have_content('SIGN IN')
+      click_on 'Log Out'
+
+      expect(current_path).to eq(root_path)
+      expect(page).to_not have_content(user.first_name)
+      expect(page).to have_content('SIGN IN')
+    end
   end
 
   it 'is shown an error when incorrect info is entered' do
