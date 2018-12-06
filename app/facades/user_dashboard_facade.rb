@@ -13,10 +13,12 @@ class UserDashboardFacade
       Repository.new(name: repo_data[:name], url: repo_data[:html_url])
     end.first(5)
   end
+
   def following
     @following ||= following_fetch_result.map do |user_data|
       GithubUser.new(login: user_data[:login], url: user_data[:html_url])
     end
+  end
 
   def followers
     @followers ||= follower_fetch_result.map do |follower_data|
