@@ -16,6 +16,13 @@
             <li class="repository"><a href = <%= repo.url %> > <%= repo.name %></a></li>
           <% end %>
         </ul>
+
+        <h2>Following</h2>
+        <ul class="repositories">
+          <% @facade.following.each do |user| %>
+            <li class="following"><a href = <%= user.url %> > <%= user.name %></a></li>
+          <% end %>
+        </ul>
     </section>
   <% end %>
   <section>

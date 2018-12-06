@@ -14,12 +14,22 @@ class UserDashboardFacade
     end.first(5)
   end
 
+  def following
+    @following ||= following_fetch_result.map do |user_data|
+      User.new(first_name: user_data[:name], url: user_data[:html_url])
+    end
+  end
+
   private
 
   attr_reader :user
 
   def repository_fetch_result
     @repository_fetch_result ||= service.repos_json
+  end
+
+  def following_fetch_result
+    @following_fetch_result ||= service.following_json
   end
 
   def service
