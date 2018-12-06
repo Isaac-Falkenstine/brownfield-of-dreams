@@ -30,8 +30,10 @@
             <li class="following"><a href = <%= user.url %> > <%= user.login %></a></li>
           <% end %>
         </ul>
-        
+
     </section>
+    <% else %>
+      <li class="connect"><a href = '/auth/github' > Connect to Github</a></li>
   <% end %>
   <section>
     <h1>Bookmarked Segments</h1>

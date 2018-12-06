@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   # Is this being used?
   get '/video', to: 'video#show'
 
+  get 'connect', to: redirect('/auth/github'), as: 'connect'
+  get 'auth/:provider/callback', to: 'users#update'
+
   resources :users, only: [:new, :create, :update, :edit]
 
   resources :tutorials, only: [:show, :index] do

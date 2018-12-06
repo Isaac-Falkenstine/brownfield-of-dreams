@@ -18,6 +18,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find(current_user.id)
+    user.token = "token #{request.env["omniauth.auth"]["credentials"]["token"]}"
+    user.save
+    redirect_to dashboard_path
+  end
+
   private
 
   def user_params
