@@ -23,5 +23,25 @@ describe 'User' do
         expect(page).to have_css('.repository', count: 5)
       end
     end
+
+    it 'wont see repos without a key' do
+      VCR.use_cassette("user_login_spec") do
+        user = create(:user)
+
+        visit login_path
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log In"
+        visit dashboard_path
+
+        within("section.github") do
+          expect(page).to have_css("h1", :text => "GitHub")
+          expect(page).to have_css("h2", :text => "Repositories")
+          expect(page).to have_content("activerecord-obstacle-course")
+          expect(page).to have_content("apollo_14")
+          expect(page).to have_css('.repository', count: 5)
+        end
+      end
+    end
   end
 end
