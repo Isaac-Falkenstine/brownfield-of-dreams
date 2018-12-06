@@ -32,6 +32,30 @@ describe 'GithubService' do
       end
     end
 
+    context "#followers_json" do
+      it "returns a array of all followers" do
+        VCR.use_cassette("github_followers_service_spec", record: :all) do
+          user_1 = create(:user, token: ENV["GITHUB_TOKEN_1"])
+          service_1 = GithubService.new(user_1.token)
+
+          expect(service_1.followers_json).to be_a(Array)
+          expect(service_1.followers_json.first).to have_key(:login)
+          expect(service_1.followers_json.first).to have_key(:html_url)
+          expect(service_1.followers_json.first[:login]).to eq("averimj")
+          expect(service_1.followers_json.first[:html_url]).to eq("https://github.com/averimj")
+
+          user_2 = create(:user, token: ENV["GITHUB_TOKEN_2"])
+          service_2 = GithubService.new(user_2.token)
+
+          expect(service_2.followers_json).to be_a(Array)
+          expect(service_2.followers_json.first).to have_key(:login)
+          expect(service_2.followers_json.first).to have_key(:html_url)
+          expect(service_2.followers_json.first[:login]).to eq("chunktooth")
+          expect(service_2.followers_json.first[:html_url]).to eq("https://github.com/chunktooth")
+        end
+      end
+    end
+
     context "#following_json" do
       it "returns the users this user is following" do
         VCR.use_cassette("github_service_spec", record: :all) do
@@ -55,5 +79,6 @@ describe 'GithubService' do
         end
       end
     end
+
   end
 end
