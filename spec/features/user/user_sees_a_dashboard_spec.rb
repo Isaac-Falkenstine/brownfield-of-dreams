@@ -7,7 +7,7 @@ describe 'User' do
       stub_request(:get, "https://api.github.com/user/repos").
         to_return(body: File.read("./spec/fixtures/github_repos.json"))
 
-      user = create(:user)
+      user = create(:user, token: ENV['GITHUB_TOKEN_1'])
 
       visit login_path
       fill_in "Email", with: user.email
@@ -34,13 +34,11 @@ describe 'User' do
         click_button "Log In"
         visit dashboard_path
 
-        within("section.github") do
-          expect(page).to have_css("h1", :text => "GitHub")
-          expect(page).to have_css("h2", :text => "Repositories")
-          expect(page).to have_content("activerecord-obstacle-course")
-          expect(page).to have_content("apollo_14")
-          expect(page).to have_css('.repository', count: 5)
-        end
+        expect(page).to_not have_css("h1", :text => "GitHub")
+        expect(page).to_not have_css("h2", :text => "Repositories")
+        expect(page).to_not have_content("activerecord-obstacle-course")
+        expect(page).to_not have_content("apollo_14")
+        expect(page).to_not have_css('.repository', count: 5)
       end
     end
   end
