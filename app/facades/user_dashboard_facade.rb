@@ -14,6 +14,12 @@ class UserDashboardFacade
     end.first(5)
   end
 
+  def followers
+    @followers ||= follower_fetch_result.map do |follower_data|
+      GithubUser.new(login: follower_data[:login], url: follower_data[:html_url])
+    end
+  end
+
   def first_name
     user.first_name
   end
@@ -32,6 +38,10 @@ class UserDashboardFacade
 
   def repository_fetch_result
     @repository_fetch_result ||= service.repos_json
+  end
+
+  def follower_fetch_result
+    @follower_fetch_result ||= service.followers_json
   end
 
   def service

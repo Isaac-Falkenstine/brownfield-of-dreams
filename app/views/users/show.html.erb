@@ -16,6 +16,12 @@
             <li class="repository"><a href = <%= repo.url %> > <%= repo.name %></a></li>
           <% end %>
         </ul>
+        <h2>Followers</h2>
+        <ul class="followers">
+          <% @facade.followers.each do |follower| %>
+            <li class="follower"><a href = <%= follower.url %> > <%= follower.login %></a></li>
+          <% end %>
+        </ul>
     </section>
   <% end %>
   <section>
