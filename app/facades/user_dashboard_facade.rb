@@ -5,13 +5,25 @@ class UserDashboardFacade
   end
 
   def token
-    @user.token
+    user.token
   end
 
   def repositories
     @repositories ||= repository_fetch_result.map do |repo_data|
       Repository.new(name: repo_data[:name], url: repo_data[:html_url])
     end.first(5)
+  end
+
+  def first_name
+    user.first_name
+  end
+
+  def last_name
+    user.last_name
+  end
+
+  def email
+    user.email
   end
 
   private
