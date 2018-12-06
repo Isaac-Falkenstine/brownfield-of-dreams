@@ -5,7 +5,7 @@ class UserDashboardFacade
   end
 
   def token
-    @user.token
+    user.token
   end
 
   def repositories
@@ -13,11 +13,21 @@ class UserDashboardFacade
       Repository.new(name: repo_data[:name], url: repo_data[:html_url])
     end.first(5)
   end
-
   def following
     @following ||= following_fetch_result.map do |user_data|
       GithubUser.new(login: user_data[:login], url: user_data[:html_url])
     end
+
+  def first_name
+    user.first_name
+  end
+
+  def last_name
+    user.last_name
+  end
+
+  def email
+    user.email
   end
 
   private
