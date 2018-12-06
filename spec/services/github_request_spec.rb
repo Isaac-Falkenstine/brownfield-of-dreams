@@ -52,6 +52,9 @@ describe 'GithubService' do
           expect(service_2.followers_json.first).to have_key(:html_url)
           expect(service_2.followers_json.first[:login]).to eq("chunktooth")
           expect(service_2.followers_json.first[:html_url]).to eq("https://github.com/chunktooth")
+        end
+      end
+    end
 
     context "#following_json" do
       it "returns the users this user is following" do

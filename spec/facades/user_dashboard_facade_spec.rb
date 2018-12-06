@@ -26,12 +26,12 @@ describe UserDashboardFacade do
     end
 
     it 'can return users youre following' do
-      VCR.use_cassette("user_dash_spec") do
-        facade = UserDashboardFacade.new(create(:user))
+      VCR.use_cassette("user_dash_spec", record: :all) do
+        facade = UserDashboardFacade.new(create(:user, token: ENV['GITHUB_TOKEN_1']))
 
         expect(facade.following).to be_a(Array)
         expect(facade.following.first).to be_a(GithubUser)
-        expect(facade.following.first.name).to eq('jcasimir')
+        expect(facade.following.first.login).to eq('jcasimir')
         expect(facade.following.first.url).to eq('https://github.com/jcasimir')
       end
     end

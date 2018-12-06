@@ -72,26 +72,25 @@ describe 'User' do
 
       user = create(:user)
 
-        visit login_path
-        fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
-        click_button "Log In"
-        visit dashboard_path
+      visit login_path
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+      click_button "Log In"
+      visit dashboard_path
 
-        expect(page).to_not have_css("h1", :text => "GitHub")
-        expect(page).to_not have_css("h2", :text => "Repositories")
-        expect(page).to_not have_css("h2", :text => "Followers")
-        expect(page).to_not have_css("h2", :text => "Following")
-        expect(page).to_not have_content("activerecord-obstacle-course")
-        expect(page).to_not have_content("apollo_14")
-        expect(page).to_not have_content("averymj")
-        expect(page).to_not have_content("MaryBork")
-        expect(page).to_not have_content("jcasimir")
-        expect(page).to_not have_content("Diazblack")
-        expect(page).to_not have_css('.repository')
-        expect(page).to_not have_css('.follower')
-        expect(page).to_not have_css('.following')
-      end
+      expect(page).to_not have_css("h1", :text => "GitHub")
+      expect(page).to_not have_css("h2", :text => "Repositories")
+      expect(page).to_not have_css("h2", :text => "Followers")
+      expect(page).to_not have_css("h2", :text => "Following")
+      expect(page).to_not have_content("activerecord-obstacle-course")
+      expect(page).to_not have_content("apollo_14")
+      expect(page).to_not have_content("averymj")
+      expect(page).to_not have_content("MaryBork")
+      expect(page).to_not have_content("jcasimir")
+      expect(page).to_not have_content("Diazblack")
+      expect(page).to_not have_css('.repository')
+      expect(page).to_not have_css('.follower')
+      expect(page).to_not have_css('.following')
     end
   end
 end
