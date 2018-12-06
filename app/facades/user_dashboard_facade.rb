@@ -13,6 +13,10 @@ class UserDashboardFacade
       Repository.new(name: repo_data[:name], url: repo_data[:html_url])
     end.first(5)
   end
+  def following
+    @following ||= following_fetch_result.map do |user_data|
+      GithubUser.new(login: user_data[:login], url: user_data[:html_url])
+    end
 
   def first_name
     user.first_name
@@ -32,6 +36,10 @@ class UserDashboardFacade
 
   def repository_fetch_result
     @repository_fetch_result ||= service.repos_json
+  end
+
+  def following_fetch_result
+    @following_fetch_result ||= service.following_json
   end
 
   def service
