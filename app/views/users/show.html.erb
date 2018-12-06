@@ -20,7 +20,7 @@
         <h2>Following</h2>
         <ul class="repositories">
           <% @facade.following.each do |user| %>
-            <li class="following"><a href = <%= user.url %> > <%= user.name %></a></li>
+            <li class="following"><a href = <%= user.url %> > <%= user.login %></a></li>
           <% end %>
         </ul>
     </section>

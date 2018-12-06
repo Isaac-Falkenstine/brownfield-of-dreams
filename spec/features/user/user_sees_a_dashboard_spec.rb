@@ -4,9 +4,6 @@ describe 'User' do
   describe 'on the dashboard page' do
 
     it 'can see a list of repositories' do
-      stub_request(:get, "https://api.github.com/user/repos").
-        to_return(body: File.read("./spec/fixtures/github_repos.json"))
-
       user = create(:user)
 
       visit login_path
@@ -24,17 +21,7 @@ describe 'User' do
       end
     end
 
-    it "should show the proper repositories with multiple users" do
-
-    end
-
     it 'can see a list of users theyre following' do
-      stub_request(:get, "https://api.github.com/user/following").
-        to_return(body: File.read("./spec/fixtures/github_following.json"))
-
-      stub_request(:get, "https://api.github.com/user/repos").
-        to_return(body: File.read("./spec/fixtures/github_repos.json"))
-
       user = create(:user)
 
       visit login_path

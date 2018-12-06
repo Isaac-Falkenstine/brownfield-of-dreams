@@ -43,6 +43,15 @@ describe 'GithubService' do
           expect(service_1.following_json.first).to have_key(:html_url)
           expect(service_1.following_json.first[:login]).to eq("jcasimir")
           expect(service_1.following_json.first[:html_url]).to eq("https://github.com/jcasimir")
+
+          user_2 = create(:user, token: ENV["GITHUB_TOKEN_2"])
+          service_2 = GithubService.new(user_2.token)
+
+          expect(service_2.following_json).to be_a(Array)
+          expect(service_2.following_json.first).to have_key(:login)
+          expect(service_2.following_json.first).to have_key(:html_url)
+          expect(service_2.following_json.first[:login]).to eq("iandouglas")
+          expect(service_2.following_json.first[:html_url]).to eq("https://github.com/iandouglas")
         end
       end
     end

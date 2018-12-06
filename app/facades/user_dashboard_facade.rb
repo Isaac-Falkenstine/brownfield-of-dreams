@@ -16,7 +16,7 @@ class UserDashboardFacade
 
   def following
     @following ||= following_fetch_result.map do |user_data|
-      User.new(first_name: user_data[:name], url: user_data[:html_url])
+      GithubUser.new(login: user_data[:login], url: user_data[:html_url])
     end
   end
 
