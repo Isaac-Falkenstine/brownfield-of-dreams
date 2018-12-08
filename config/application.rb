@@ -29,5 +29,9 @@ module PersonalProject
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.middleware.use OmniAuth::Builder do
+      provider :github, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"]
+    end
   end
 end

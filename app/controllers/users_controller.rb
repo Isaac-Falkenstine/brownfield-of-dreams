@@ -18,6 +18,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if request.env["PATH_INFO"] == "/auth/github/callback"
+      token = request.env["omniauth.auth"].credentials.token
+      current_user.update_attribute :token, "token #{token}"
+    elsif request.env["PATH_INFO"] == "auth/failure"
+      flash[:error] = "Authentication failed"
+    end
+    redirect_to dashboard_path
+  end
+
   private
 
   def user_params
