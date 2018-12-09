@@ -30,12 +30,18 @@
             <li class="following"><a href = <%= user.url %> > <%= user.login %></a></li>
           <% end %>
         </ul>
-        
+
     </section>
   <% else %>
     <%= link_to "Connect to GitHub", github_auth_path %>
   <% end %>
   <section>
-    <h1>Bookmarked Segments</h1>
+    
   </section>
+  <h1>Bookmarked Segments</h1>
+  <ul class="bookmarkss">
+    <% @facade.bookmarks.each do |video| %>
+      <li class="bookmarks">  <%= video.title %> </li>
+    <% end %>
+  </ul>
 </section>
