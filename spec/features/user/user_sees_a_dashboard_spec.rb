@@ -96,7 +96,8 @@ describe 'User' do
   it 'can bookmark videos' do
 
     user = create(:user)
-    tutorial = create(:tutorial)
+    video = create(:video)
+    tutorial = video.tutorial
 
     visit login_path
     fill_in "Email", with: user.email
@@ -108,10 +109,10 @@ describe 'User' do
 
     visit dashboard_path
 
-    expect(page).to have_css("h2", :text => "Bookmarked Segments")
-    expect(page).to have_content("Prework - Environment Setup")
+    expect(page).to have_css("h1", :text => "Bookmarked Segments")
+    expect(page).to have_content(video.title)
 
-    click_on "Prework - Environment Setup"
+    click_on video.title
 
     expect(current_path).to eq(tutorial_path(tutorial))
   end

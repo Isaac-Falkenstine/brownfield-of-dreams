@@ -36,12 +36,12 @@
     <%= link_to "Connect to GitHub", github_auth_path %>
   <% end %>
   <section>
-    
+
   </section>
   <h1>Bookmarked Segments</h1>
-  <ul class="bookmarkss">
+  <ul class="bookmarks">
     <% @facade.bookmarks.each do |video| %>
-      <li class="bookmarks">  <%= video.title %> </li>
+      <li class="bookmarks"><a href = "/tutorials/<%= video.tutorial_id %>?video_id=<%= video.id %>"> <%= video.title %></a></li>
     <% end %>
   </ul>
 </section>
