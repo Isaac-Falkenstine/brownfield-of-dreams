@@ -20,7 +20,13 @@
         <h2>Followers</h2>
         <ul class="followers">
           <% @facade.followers.each do |follower| %>
-            <li class="follower"><a href = <%= follower.url %> > <%= follower.login %></a></li>
+            <li class="follower">
+              <a href = <%= follower.url %> > <%= follower.login %></a>
+              <%= link_to "Add Friend", 
+                user_friendships_path(user_id: @facade.id, 
+                                      following_id: follower.id),
+                method: :post %>
+            </li>
           <% end %>
         </ul>
 
