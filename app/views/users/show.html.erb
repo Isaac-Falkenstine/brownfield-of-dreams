@@ -7,6 +7,7 @@
     <li> <%= @facade.first_name  %> <%= @facade.last_name %> </li>
     <li> <%= @facade.email%> </li>
   </ul>
+
   <% if @facade.token %>
     <section class="github">
       <h1>GitHub</h1>
@@ -44,14 +45,12 @@
             </li>
           <% end %>
         </ul>
-        
     </section>
+
   <% else %>
     <%= link_to "Connect to GitHub", github_auth_path %>
   <% end %>
-  <section>
-    <h1>Bookmarked Segments</h1>
-  </section>
+
   <% if @facade.friends.first %>
     <section class="friends">
       <h1>Friends</h1>
@@ -64,4 +63,16 @@
       </ul>
     </section>
   <% end %>
-</section>
+
+  <section>
+    <h1>Bookmarked Segments</h1>
+    <ul class="bookmarks">
+      <% @facade.bookmarks.each do |video| %>
+        <li class="bookmarks">
+          <a href = "/tutorials/<%= video.tutorial_id %>?video_id=<%= video.id %>">
+            <%= video.title %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </section>

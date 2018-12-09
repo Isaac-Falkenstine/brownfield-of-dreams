@@ -46,7 +46,6 @@ group :development, :test do
   gem 'vcr'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
-  gem 'rails-controller-testing'
 end
 
 group :development do
