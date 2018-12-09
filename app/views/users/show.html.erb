@@ -7,6 +7,7 @@
     <li> <%= @facade.first_name  %> <%= @facade.last_name %> </li>
     <li> <%= @facade.email%> </li>
   </ul>
+
   <% if @facade.token %>
     <section class="github">
       <h1>GitHub</h1>
@@ -20,28 +21,58 @@
         <h2>Followers</h2>
         <ul class="followers">
           <% @facade.followers.each do |follower| %>
-            <li class="follower"><a href = <%= follower.url %> > <%= follower.login %></a></li>
+            <li class="follower">
+              <a href = <%= follower.url %> > <%= follower.login %></a>
+              <%= link_to "Add Friend",
+                user_friendships_path(user_id: @facade.id, 
+                                      followed_id: follower.user_id),
+                method: :post,
+                class: "add-friend" if follower.user_id %> 
+            </li>
           <% end %>
         </ul>
 
         <h2>Following</h2>
         <ul class="followings">
-          <% @facade.following.each do |user| %>
-            <li class="following"><a href = <%= user.url %> > <%= user.login %></a></li>
+          <% @facade.following.each do |following| %>
+            <li class="following">
+              <a href = <%= following.url %> > <%= following.login %></a>
+              <%= link_to "Add Friend",
+                user_friendships_path(user_id: @facade.id, 
+                                      followed_id: following.user_id),
+                method: :post,
+                class: "add-friend" if following.user_id %> 
+            </li>
           <% end %>
         </ul>
-
     </section>
+
   <% else %>
     <%= link_to "Connect to GitHub", github_auth_path %>
   <% end %>
-  <section>
 
+  <% if @facade.friends.first %>
+    <section class="friends">
+      <h1>Friends</h1>
+      <ul>
+        <% @facade.friends.each do |friend| %>
+          <li class="friend">
+            <%= friend.first_name %> <%= friend.last_name %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+
+  <section>
+    <h1>Bookmarked Segments</h1>
+    <ul class="bookmarks">
+      <% @facade.bookmarks.each do |video| %>
+        <li class="bookmarks">
+          <a href = "/tutorials/<%= video.tutorial_id %>?video_id=<%= video.id %>">
+            <%= video.title %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </section>
-  <h1>Bookmarked Segments</h1>
-  <ul class="bookmarks">
-    <% @facade.bookmarks.each do |video| %>
-      <li class="bookmarks"><a href = "/tutorials/<%= video.tutorial_id %>?video_id=<%= video.id %>"> <%= video.title %></a></li>
-    <% end %>
-  </ul>
-</section>

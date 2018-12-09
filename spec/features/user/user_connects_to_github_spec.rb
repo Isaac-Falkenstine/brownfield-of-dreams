@@ -27,6 +27,7 @@ describe "User connects to GitHub" do
     
     expect(current_path).to eq(dashboard_path)
     expect(User.first.token).to eq("token 123456789")
+    expect(User.first.github_id).to eq(1234)
 
   end
 
@@ -50,6 +51,7 @@ describe "User connects to GitHub" do
     
     expect(current_path).to eq(dashboard_path)
     expect(User.first.token).to be_nil
+    expect(User.first.github_id).to be_nil
 
   end
 end

@@ -10,22 +10,35 @@ class UserDashboardFacade
 
   def repositories
     @repositories ||= repository_fetch_result.map do |repo_data|
-      Repository.new(name: repo_data[:name], url: repo_data[:html_url])
+      params = {name: repo_data[:name], url: repo_data[:html_url]}
+      Repository.new(params)
     end.first(5)
   end
 
   def following
     @following ||= following_fetch_result.map do |user_data|
-      GithubUser.new(login: user_data[:login], url: user_data[:html_url])
+      create_github_user(user_data)
     end
   end
 
   def followers
-    @followers ||= follower_fetch_result.map do |follower_data|
-      GithubUser.new(login: follower_data[:login], url: follower_data[:html_url])
+    @followers ||= follower_fetch_result.map do |user_data|
+      create_github_user(user_data)
     end
   end
 
+  def create_github_user(user_data)
+    params = {login: user_data[:login], 
+              url: user_data[:html_url],
+              github_id: user_data[:id],
+              user_id: github_user_account(user_data[:id])}
+    GithubUser.new(params)
+  end
+
+  def friends
+    user.friends.to_a
+  end
+  
   def bookmarks
     user.videos
   end
@@ -40,6 +53,15 @@ class UserDashboardFacade
 
   def email
     user.email
+  end
+
+  def id
+    user.id
+  end
+
+  def github_user_account(github_id)
+    user = User.find_by(github_id: github_id)
+    user ? user.id : nil
   end
 
   private
