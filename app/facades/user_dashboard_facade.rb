@@ -26,6 +26,10 @@ class UserDashboardFacade
     end
   end
 
+  def bookmarks
+    user.videos
+  end
+
   def first_name
     user.first_name
   end
@@ -49,7 +53,7 @@ class UserDashboardFacade
   def follower_fetch_result
     @follower_fetch_result ||= service.followers_json
   end
-  
+
   def following_fetch_result
     @following_fetch_result ||= service.following_json
   end
