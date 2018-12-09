@@ -22,18 +22,26 @@
           <% @facade.followers.each do |follower| %>
             <li class="follower">
               <a href = <%= follower.url %> > <%= follower.login %></a>
-              <%= link_to "Add Friend", 
+              <%= link_to "Add Friend",
                 user_friendships_path(user_id: @facade.id, 
-                                      following_id: follower.id),
-                method: :post %>
+                                      followed_id: follower.user_id),
+                method: :post,
+                class: "add-friend" if follower.user_id %> 
             </li>
           <% end %>
         </ul>
 
         <h2>Following</h2>
         <ul class="followings">
-          <% @facade.following.each do |user| %>
-            <li class="following"><a href = <%= user.url %> > <%= user.login %></a></li>
+          <% @facade.following.each do |following| %>
+            <li class="following">
+              <a href = <%= following.url %> > <%= following.login %></a>
+              <%= link_to "Add Friend",
+                user_friendships_path(user_id: @facade.id, 
+                                      followed_id: following.user_id),
+                method: :post,
+                class: "add-friend" if following.user_id %> 
+            </li>
           <% end %>
         </ul>
         
@@ -44,4 +52,16 @@
   <section>
     <h1>Bookmarked Segments</h1>
   </section>
+  <% if @facade.friends.first %>
+    <section class="friends">
+      <h1>Friends</h1>
+      <ul>
+        <% @facade.friends.each do |friend| %>
+          <li class="friend">
+            <%= friend.first_name %> <%= friend.last_name %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
 </section>

@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 2018_12_08_231657) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "follower_id"
-    t.integer "following_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_id"], name: "index_friendships_on_follower_id_and_following_id", unique: true
+    t.index ["followed_id"], name: "index_friendships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_friendships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_friendships_on_follower_id"
-    t.index ["following_id"], name: "index_friendships_on_following_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_231657) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
+    t.integer "github_id"
+    t.integer "user_id"
     t.index ["email"], name: "index_users_on_email"
   end
 

@@ -17,20 +17,26 @@ class UserDashboardFacade
 
   def following
     @following ||= following_fetch_result.map do |user_data|
-      params = {login: user_data[:login], 
-                url: user_data[:html_url]}
-                # account_id: github_user_account_id(user_data[:login])}
-      GithubUser.new(params)
+      create_github_user(user_data)
     end
   end
 
   def followers
     @followers ||= follower_fetch_result.map do |user_data|
-      params = {login: user_data[:login], 
-        url: user_data[:html_url]}
-        # account_id: github_user_account_id(user_data[:login])}
-      GithubUser.new(params)
+      create_github_user(user_data)
     end
+  end
+
+  def create_github_user(user_data)
+    params = {login: user_data[:login], 
+              url: user_data[:html_url],
+              github_id: user_data[:id],
+              user_id: github_user_account(user_data[:id])}
+    GithubUser.new(params)
+  end
+
+  def friends
+    user.friends.to_a
   end
 
   def first_name
@@ -49,19 +55,14 @@ class UserDashboardFacade
     user.id
   end
 
-  # def github_user_account_id(login)
-  #   email = github_user_fetch_result(login)[:email]
-  #   user = User.find_by(email: email)
-  #   return user.id if user
-  # end
+  def github_user_account(github_id)
+    user = User.find_by(github_id: github_id)
+    user ? user.id : nil
+  end
 
   private
 
   attr_reader :user
-
-  # def github_user_fetch_result(login)
-  #   @github_user_fetch_result ||= service.user_json(login)
-  # end
 
   def repository_fetch_result
     @repository_fetch_result ||= service.repos_json
