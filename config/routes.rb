@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       resources :tutorials, only:[:show, :index]
@@ -32,13 +33,19 @@ Rails.application.routes.draw do
   get '/about', to: 'about#show'
   get '/get_started', to: 'get_started#show'
 
+  get '/auth/github', as: 'github_auth'
+  get '/auth/github/callback', to: 'users#update'
+  get '/auth/failure', to: 'users#update'
+
   # Is this being used?
   get '/video', to: 'video#show'
 
   get 'connect', to: redirect('/auth/github'), as: 'connect'
   get 'auth/:provider/callback', to: 'users#update'
 
-  resources :users, only: [:new, :create, :update, :edit]
+  resources :users, only: [:new, :create, :update, :edit] do
+    resources :friendships, only: [:create]
+  end
 
   resources :tutorials, only: [:show, :index] do
     resources :videos, only: [:show, :index]

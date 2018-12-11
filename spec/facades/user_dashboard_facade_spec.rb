@@ -35,5 +35,19 @@ describe UserDashboardFacade do
         expect(facade.following.first.url).to eq('https://github.com/jcasimir')
       end
     end
+
+    it 'can return all friended users' do
+      VCR.use_cassette("user_dash_spec", record: :all) do
+        user = create(:user)
+        friend = create(:user)
+        facade = UserDashboardFacade.new(user)
+        Friendship.create(follower: user, followed: friend)
+
+        expect(facade.friends).to be_a(Array)
+        expect(facade.friends.first).to be_a(User)
+        expect(facade.friends.first.first_name).to eq(friend.first_name)
+        expect(facade.friends.first.last_name).to eq(friend.last_name)
+      end
+    end
   end
 end

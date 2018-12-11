@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @facade = UserDashboardFacade.new(current_user)
+    # binding.pry
   end
 
   def new
@@ -19,9 +20,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(current_user.id)
-    user.token = "token #{request.env["omniauth.auth"]["credentials"]["token"]}"
-    user.save
+    if request.env["PATH_INFO"] == "/auth/github/callback"
+      token = request.env["omniauth.auth"].credentials.token
+      current_user.update_attribute(:token, "token #{token}")
+      current_user.update_attribute(:github_id, request.env["omniauth.auth"].uid)
+    elsif request.env["PATH_INFO"] == "auth/failure"
+      flash[:error] = "Authentication failed"
+    end
     redirect_to dashboard_path
   end
 

@@ -29,6 +29,7 @@ gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-c
 gem 'omniauth-github'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'omniauth'
 
 
 group :development, :test do

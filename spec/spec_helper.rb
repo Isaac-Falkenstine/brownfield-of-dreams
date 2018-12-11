@@ -1,3 +1,11 @@
+require 'omniauth'
+
+OmniAuth.config.test_mode = true
+
+omniauth_hash = { 'credentials' => {'token' => "123456789" }}
+
+OmniAuth.config.add_mock(:github, omniauth_hash)
+
 RSpec.configure do |config|
 
   config.before(:suite) do
