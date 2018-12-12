@@ -43,7 +43,7 @@ describe 'As a registered user' do
     it 'displays a success message on the dashboard page' do
       click_on "Send an Invite"
 
-      fill_in "handle", with: "myfriend"
+      fill_in "login", with: "myfriend"
       click_on "Send Invite"
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Successfully sent invite!")
@@ -60,7 +60,7 @@ describe 'As a registered user' do
     it 'displays an error message on the dashboard page' do
       click_on "Send an Invite"
 
-      fill_in "handle", with: "notmyfriend"
+      fill_in "login", with: "notmyfriend"
       click_on "Send Invite"
 
       expect(current_path).to eq(dashboard_path)
@@ -78,7 +78,7 @@ describe 'As a registered user' do
     it 'displays an error message on the dashboard page' do
       click_on "Send an Invite"
 
-      fill_in "handle", with: "myfriendwithnoemail"
+      fill_in "login", with: "myfriendwithnoemail"
       click_on "Send Invite"
 
       expect(current_path).to eq(dashboard_path)
