@@ -28,7 +28,7 @@ class UserDashboardFacade
   end
 
   def create_github_user(user_data)
-    params = {login: user_data[:login], 
+    params = {login: user_data[:login],
               url: user_data[:html_url],
               github_id: user_data[:id],
               user_id: github_user_account(user_data[:id])}
@@ -38,7 +38,7 @@ class UserDashboardFacade
   def friends
     user.friends.to_a
   end
-  
+
   def bookmarks
     user.videos
   end
@@ -57,6 +57,10 @@ class UserDashboardFacade
 
   def id
     user.id
+  end
+
+  def status
+    user.status
   end
 
   def github_user_account(github_id)
