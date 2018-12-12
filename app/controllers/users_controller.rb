@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
     @facade = UserDashboardFacade.new(current_user)
-    # binding.pry
   end
 
   def new

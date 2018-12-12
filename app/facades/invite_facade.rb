@@ -27,7 +27,6 @@ class InviteFacade
     params = {login: user_data[:login],
               url: user_data[:html_url],
               github_id: user_data[:id],
-                # user_id: nil,
               name: user_data[:name],
               email: user_data[:email]}
     params[:name] = user_data[:login] if !params[:name]
