@@ -3,5 +3,6 @@ class AddTokenToUsers < ActiveRecord::Migration[5.2]
     add_column :users, :token, :string
     add_column :users, :github_id, :integer
     add_column :users, :user_id, :integer
+    add_column :users, :github_login, :string
   end
 end
