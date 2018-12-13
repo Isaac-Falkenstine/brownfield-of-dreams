@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     resources :tutorials, only: [:create, :edit, :update, :destroy, :new] do
       resources :videos, only: [:create]
     end
-    resources :videos, only: [:edit, :update, :destroy]
 
     namespace :api do
       namespace :v1 do
@@ -40,9 +39,6 @@ Rails.application.routes.draw do
   get '/invite', to: 'invite#new'
   post '/invitation', to: 'invite#create'
 
-  # Is this being used?
-  get '/video', to: 'video#show'
-
   resources :users, only: [:new, :create, :update, :edit] do
     resources :friendships, only: [:create]
     get '/activate', to: 'users#confirm_email'
@@ -52,5 +48,5 @@ Rails.application.routes.draw do
     resources :videos, only: [:show, :index]
   end
 
-  resources :user_videos, only:[:create, :destroy]
+  resources :user_videos, only: [:create]
 end
