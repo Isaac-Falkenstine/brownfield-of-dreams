@@ -37,9 +37,9 @@ class UsersController < ApplicationController
     user = User.find_by_status_token(params[:user_id])
     if user
       user.update_attribute(:status, "Active")
-      user.update_attribute(:status_token, nil)
       flash[:success] = "Your account has been activated."
-      redirect_to dashboard_url
+      binding.pry
+      redirect_to root_url
     else
       flash[:error] = "Sorry. User does not exist"
       redirect_to root_url
