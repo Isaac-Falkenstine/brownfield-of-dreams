@@ -38,12 +38,10 @@ class UsersController < ApplicationController
     if user
       user.update_attribute(:status, "Active")
       flash[:success] = "Your account has been activated."
-      binding.pry
-      redirect_to root_url
     else
       flash[:error] = "Sorry. User does not exist"
-      redirect_to root_url
     end
+    redirect_to root_url
   end
 
   private
