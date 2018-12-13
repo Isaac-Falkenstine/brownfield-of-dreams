@@ -34,13 +34,13 @@ describe 'As an admin' do
       fill_in "tutorial_thumbnail", with: "http://example.com/why.jpg"
 
       click_button "Save"
-      
+
       expect(current_path).to eq(admin_dashboard_path)
       expect(page).to have_content("Tutorial successfully created.")
       expect(page).to have_content("Mod 7")
     end
 
-    pending 'throws an error when I do not provide a title' do
+    it 'throws an error when I do not provide a title' do
       click_on "New Tutorial"
 
       fill_in "tutorial_description", with: "So you want to be a 14er?"
@@ -51,6 +51,5 @@ describe 'As an admin' do
       expect(current_path).to eq(new_admin_tutorial_path)
       expect(page).to have_content("Tutorial could not be created.")
     end
-
   end
 end

@@ -16,8 +16,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path
     else
-      flash[:error] = 'Username already exists'
-      render :new
+      flash[:error] = 'This e-mail is already in use!'
+      redirect_to register_path
     end
   end
 
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       current_user.update_attribute(:token, "token #{token}")
       current_user.update_attribute(:github_id, request.env["omniauth.auth"].uid)
       current_user.update_attribute(:github_login, request.env["omniauth.auth"].login)
-    elsif request.env["PATH_INFO"] == "auth/failure"
+    elsif request.env["PATH_INFO"] == "/auth/failure"
       flash[:error] = "Authentication failed"
     end
     redirect_to dashboard_path

@@ -11,7 +11,7 @@ describe "User connects to GitHub" do
     stub_request(:get, "https://api.github.com/user/following").
       to_return(body: File.read("./spec/fixtures/github_following.json"))
   end
-  
+
   it "should return a GitHub access token when authenticated" do
 
     user = create(:user)
@@ -22,9 +22,9 @@ describe "User connects to GitHub" do
     click_button "Log In"
     visit dashboard_path
     expect(user.token).to be_nil
-    
+
     click_on "Connect to GitHub"
-    
+
     expect(current_path).to eq(dashboard_path)
     expect(User.first.token).to eq("token 123456789")
     expect(User.first.github_id).to eq(1234)
@@ -46,10 +46,11 @@ describe "User connects to GitHub" do
     click_button "Log In"
     visit dashboard_path
     expect(user.token).to be_nil
-    
+
     click_on "Connect to GitHub"
-    
+
     expect(current_path).to eq(dashboard_path)
+    expect(page).to have_content("Authentication failed")
     expect(User.first.token).to be_nil
     expect(User.first.github_id).to be_nil
 

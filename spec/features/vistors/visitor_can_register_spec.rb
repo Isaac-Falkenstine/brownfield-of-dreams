@@ -36,9 +36,10 @@ describe 'vistor can create an account', :js do
     end
   end
 
-  pending 'does not create accounts with duplicate emails' do
+  it 'does not create accounts with duplicate emails' do
     VCR.use_cassette("vist_home_page_spec") do
-      existing_user = create(:user, email: 'jimbob@aol.com')
+      create(:user, email: 'jimbob@aol.com')
+
       email = 'jimbob@aol.com'
       first_name = 'Jim'
       last_name = 'Bob'
@@ -47,11 +48,20 @@ describe 'vistor can create an account', :js do
       visit '/'
       click_on 'Register'
 
-      expect(current_path).to eq(new_user_path)
-      expect(page).to have_content("Username already exists")
+      expect(current_path).to eq(register_path)
+
+      fill_in 'user[email]', with: email
+      fill_in 'user[first_name]', with: first_name
+      fill_in 'user[last_name]', with: last_name
+      fill_in 'user[password]', with: password
+      fill_in 'user[password_confirmation]', with: password
+
+      click_on'Create Account'
+
+      expect(page).to have_content("This e-mail is already in use!")
     end
   end
-      
+
   it 'gets a flash when making a account' do
     VCR.use_cassette("email_flash_spec") do
       email = 'jimbob@aol.com'
