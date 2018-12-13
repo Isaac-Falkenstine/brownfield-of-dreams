@@ -1,6 +1,4 @@
 class UserVideosController < ApplicationController
-  def new
-  end
 
   def create
     user_video = UserVideo.new(user_video_params)
