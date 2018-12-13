@@ -3,7 +3,7 @@ class Video < ApplicationRecord
   has_many :users, through: :user_videos
   belongs_to :tutorial
 
-  validates_presence_of :position
+  validates_presence_of :position, :title
 
   def self.assign_nil_position
     videos = Video.where(position: nil)

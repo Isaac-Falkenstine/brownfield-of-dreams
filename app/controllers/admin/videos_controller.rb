@@ -1,14 +1,12 @@
 class Admin::VideosController < Admin::BaseController
   def create
-    begin
-      tutorial  = Tutorial.find(params[:tutorial_id])
-      thumbnail = YouTube::Video.by_id(video_params[:video_id]).thumbnail
-      video     = tutorial.videos.new(video_params.merge(thumbnail: thumbnail))
+    tutorial  = Tutorial.find(params[:tutorial_id])
+    thumbnail = YouTube::Video.by_id(video_params[:video_id]).thumbnail
+    video     = tutorial.videos.new(video_params.merge(thumbnail: thumbnail))
 
-      video.save
-
+    if video.save
       flash[:success] = "Successfully created video."
-    rescue # Sorry about this. We should get more specific instead of swallowing all errors.
+    else
       flash[:error] = "Unable to create video."
     end
 
