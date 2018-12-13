@@ -12,40 +12,43 @@
   <% if @facade.token %>
     <section class="github">
       <h1>GitHub</h1>
-        <h2>Repositories</h2>
-        <ul class="repositories">
-          <% @facade.repositories.each do |repo| %>
-            <li class="repository"><a href = <%= repo.url %> > <%= repo.name %></a></li>
-          <% end %>
-        </ul>
 
-        <h2>Followers</h2>
-        <ul class="followers">
-          <% @facade.followers.each do |follower| %>
-            <li class="follower">
-              <a href = <%= follower.url %> > <%= follower.login %></a>
-              <%= link_to "Add Friend",
-                user_friendships_path(user_id: @facade.id,
-                                      followed_id: follower.user_id),
-                method: :post,
-                class: "add-friend" if follower.user_id %>
-            </li>
-          <% end %>
-        </ul>
+      <%= link_to "Send an Invite", invite_path %>
 
-        <h2>Following</h2>
-        <ul class="followings">
-          <% @facade.following.each do |following| %>
-            <li class="following">
-              <a href = <%= following.url %> > <%= following.login %></a>
-              <%= link_to "Add Friend",
-                user_friendships_path(user_id: @facade.id,
-                                      followed_id: following.user_id),
-                method: :post,
-                class: "add-friend" if following.user_id %>
-            </li>
-          <% end %>
-        </ul>
+      <h2>Repositories</h2>
+      <ul class="repositories">
+        <% @facade.repositories.each do |repo| %>
+          <li class="repository"><a href = <%= repo.url %> > <%= repo.name %></a></li>
+        <% end %>
+      </ul>
+
+      <h2>Followers</h2>
+      <ul class="followers">
+        <% @facade.followers.each do |follower| %>
+          <li class="follower">
+            <a href = <%= follower.url %> > <%= follower.login %></a>
+            <%= link_to "Add Friend",
+              user_friendships_path(user_id: @facade.id,
+                                    followed_id: follower.user_id),
+              method: :post,
+              class: "add-friend" if follower.user_id %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h2>Following</h2>
+      <ul class="followings">
+        <% @facade.following.each do |following| %>
+          <li class="following">
+            <a href = <%= following.url %> > <%= following.login %></a>
+            <%= link_to "Add Friend",
+              user_friendships_path(user_id: @facade.id,
+                                    followed_id: following.user_id),
+              method: :post,
+              class: "add-friend" if following.user_id %>
+          </li>
+        <% end %>
+      </ul>
     </section>
 
   <% else %>

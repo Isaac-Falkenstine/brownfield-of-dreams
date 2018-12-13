@@ -68,23 +68,23 @@ class UserDashboardFacade
     user ? user.id : nil
   end
 
-  private
+    private
 
-  attr_reader :user
+    attr_reader :user
 
-  def repository_fetch_result
-    @repository_fetch_result ||= service.repos_json
-  end
+    def repository_fetch_result
+      @repository_fetch_result ||= service.repos_json
+    end
 
-  def follower_fetch_result
-    @follower_fetch_result ||= service.followers_json
-  end
+    def follower_fetch_result
+      @follower_fetch_result ||= service.followers_json
+    end
 
-  def following_fetch_result
-    @following_fetch_result ||= service.following_json
-  end
+    def following_fetch_result
+      @following_fetch_result ||= service.following_json
+    end
 
-  def service
-    GithubService.new(user.token)
-  end
+    def service
+      GithubService.new(user.token)
+    end
 end
