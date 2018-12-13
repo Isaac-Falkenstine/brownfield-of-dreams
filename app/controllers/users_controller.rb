@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.save
+      ActivateMailer.inform(user).deliver_now
+      flash[:success] = "Logged in as #{user.first_name} #{user.last_name}"
+      flash[:notice] = "This account has not yet been activated. Please check your email."
       session[:user_id] = user.id
       redirect_to dashboard_path
     else
@@ -28,6 +31,19 @@ class UsersController < ApplicationController
       flash[:error] = "Authentication failed"
     end
     redirect_to dashboard_path
+  end
+
+  def confirm_email
+    user = User.find_by_status_token(params[:user_id])
+    if user
+      user.update_attribute(:status, "Active")
+      flash[:success] = "Your account has been activated."
+      binding.pry
+      redirect_to root_url
+    else
+      flash[:error] = "Sorry. User does not exist"
+      redirect_to root_url
+    end
   end
 
   private

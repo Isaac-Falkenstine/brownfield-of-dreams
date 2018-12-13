@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'vister can create an account', :js do
+describe 'vistor can create an account', :js do
 
   it ' visits the home page' do
     VCR.use_cassette("vist_home_page_spec") do
@@ -8,7 +8,6 @@ describe 'vister can create an account', :js do
       first_name = 'Jim'
       last_name = 'Bob'
       password = 'password'
-      password_confirmation = 'password'
 
       visit '/'
 
@@ -44,10 +43,23 @@ describe 'vister can create an account', :js do
       first_name = 'Jim'
       last_name = 'Bob'
       password = 'password'
-      password_confirmation = 'password'
 
       visit '/'
       click_on 'Register'
+
+      expect(current_path).to eq(new_user_path)
+      expect(page).to have_content("Username already exists")
+    end
+      
+  it 'gets a flash when making a account' do
+    VCR.use_cassette("email_flash_spec") do
+      email = 'jimbob@aol.com'
+      first_name = 'Jim'
+      last_name = 'Bob'
+      password = 'password'
+
+      visit new_user_path
+
       fill_in 'user[email]', with: email
       fill_in 'user[first_name]', with: first_name
       fill_in 'user[last_name]', with: last_name
@@ -56,8 +68,9 @@ describe 'vister can create an account', :js do
 
       click_on'Create Account'
 
-      expect(current_path).to eq(new_user_path)
-      expect(page).to have_content("Username already exists")
+      expect(page).to have_content("This account has not yet been activated. Please check your email.")
+      expect(page).to have_content("Logged in as #{first_name} #{last_name}")
+      expect(page).to have_content("Status: Inactive")
     end
   end
 end
