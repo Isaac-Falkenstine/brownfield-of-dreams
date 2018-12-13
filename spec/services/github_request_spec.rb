@@ -10,7 +10,7 @@ describe 'GithubService' do
   context "instance methods" do
     context "#repos_json" do
       it "returns a array of 5 repos" do
-        VCR.use_cassette("github_service_spec", record: :all) do
+        VCR.use_cassette("github_service_spec") do
           user_1 = create(:user, token: ENV["GITHUB_TOKEN_1"])
           service_1 = GithubService.new(user_1.token)
 
@@ -34,7 +34,7 @@ describe 'GithubService' do
 
     context "#followers_json" do
       it "returns a array of all followers" do
-        VCR.use_cassette("github_followers_service_spec", record: :all) do
+        VCR.use_cassette("github_followers_service_spec") do
           user_1 = create(:user, token: ENV["GITHUB_TOKEN_1"])
           service_1 = GithubService.new(user_1.token)
 
@@ -58,7 +58,7 @@ describe 'GithubService' do
 
     context "#following_json" do
       it "returns the users this user is following" do
-        VCR.use_cassette("github_service_spec", record: :all) do
+        VCR.use_cassette("github_service_spec") do
           user_1 = create(:user, token: ENV["GITHUB_TOKEN_1"])
           service_1 = GithubService.new(user_1.token)
 
