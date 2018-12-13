@@ -4,6 +4,15 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def create
+    begin
+      tutorial = Tutorial.new(new_tutorial_params)
+      tutorial.save
+      flash[:success] = 'Tutorial successfully created.'
+      redirect_to admin_dashboard_path
+    rescue ActiveRecord::RecordInvalid => e
+      flash[:error] = 'Tutorial could not be created.'
+      render :new
+    end
   end
 
   def new
@@ -19,7 +28,15 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   private
+
+  def new_tutorial_params
+    params.require(:tutorial).permit(:title,
+                                     :description,
+                                     :thumbnail)
+  end
+
   def tutorial_params
     params.require(:tutorial).permit(:tag_list)
   end
+
 end
