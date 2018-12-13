@@ -4,9 +4,9 @@ class GithubService
     @token = token
   end
 
-  # def user_json(login)
-  #   get_json("/users/#{login}")
-  # end
+  def user_json(login)
+    get_json("/users/#{login}")
+  end
 
   def repos_json
     get_json("/user/repos")

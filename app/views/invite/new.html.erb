@@ -1,0 +1,8 @@
+<h2>Enter a GitHub handle to send an invitation.</h2>
+
+<% if current_user %>
+  <%= form_tag '/invitation' do %>
+    GitHub Handle: <%= text_field_tag :login %>
+    <%= submit_tag "Send Invite" %>
+  <% end %>
+<% end %>
