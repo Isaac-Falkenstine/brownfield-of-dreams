@@ -1,0 +1,22 @@
+<div class="edit-video">
+  <main>
+    <h4><%= @video.title %></h4>
+    <section>
+      <%= form_for @video do |form| %>
+        <div >
+          <%= form.label :title %>
+          <%= form.text_field :title %>
+        </div>
+        <div >
+          <%= form.label :description %>
+          <%= form.text_field :description %>
+        </div>
+        <div>
+          <%= form.label :thumbnail %>
+          <%= form.text_field :thumbnail %>
+        </div>
+        <%= form.submit 'Update Video' %>
+      <% end %>
+    </section>
+  </main>
+</div>

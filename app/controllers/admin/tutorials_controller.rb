@@ -4,11 +4,12 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def create
-    tutorial = Tutorial.new(new_tutorial_params)
-    if tutorial.save
+    begin
+      tutorial = Tutorial.new(new_tutorial_params)
+      tutorial.save
       flash[:success] = 'Tutorial successfully created.'
       redirect_to admin_dashboard_path
-    else
+    rescue ActiveRecord::RecordInvalid => e
       flash[:error] = 'Tutorial could not be created.'
       render :new
     end
