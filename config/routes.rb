@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :update, :edit] do
     resources :friendships, only: [:create]
-    get :confirm_email
+    get '/activate', to: 'users#confirm_email'
   end
 
   resources :tutorials, only: [:show, :index] do

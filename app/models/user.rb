@@ -18,11 +18,9 @@ class User < ApplicationRecord
   enum role: [:default, :admin]
   has_secure_password
 
-  private
-
   def confirmation_token
     if self.status_token.blank?
-        self.status_token = SecureRandom.urlsafe_base64.to_s
+      self.status_token = SecureRandom.urlsafe_base64.to_s
     end
   end
 end
