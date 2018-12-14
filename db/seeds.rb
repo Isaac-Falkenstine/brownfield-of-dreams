@@ -117,27 +117,26 @@ m3_tutorial.videos.create!({
 
 Tutorial.create!(title: "Temporary Tutorial", classroom: true)
 
-User.create!(email: 'admin@example.com', 
-             first_name: 'Bossy', 
-             last_name: 'McBosserton', 
-             password:  "password", 
-             role: :admin, 
-             token: ENV["GITHUB_TOKEN_1"], 
-             github_id: 41242161,
-             github_login: 'Isaac-Falkenstine')
-User.create!(email: 'averi@example.com', 
-             first_name: 'Averi', 
-             last_name: 'Johnson', 
-             password:  "password", 
-             github_id: 33760591, 
+User.create!(email: 'admin@example.com',
+             first_name: 'Bossy',
+             last_name: 'McBosserton',
+             password:  "password",
+             role: :admin,
+             github_id: 38509894,
+             github_login: 'MaryBork')
+User.create!(email: 'averi@example.com',
+             first_name: 'Averi',
+             last_name: 'Johnson',
+             password:  "password",
+             github_id: 33760591,
              github_login: 'averimj')
-User.create!(email: 'jeff@example.com', 
-             first_name: 'Jeff', 
-             last_name: 'Casimir', 
-             password:  "password", 
-             github_id: 43102, 
+User.create!(email: 'jeff@example.com',
+             first_name: 'Jeff',
+             last_name: 'Casimir',
+             password:  "password",
+             github_id: 43102,
              github_login: 'jcasimir')
-User.create!(email: 'regular@example.com', 
-             first_name: 'Regular', 
-             last_name: 'Joe', 
+User.create!(email: 'regular@example.com',
+             first_name: 'Regular',
+             last_name: 'Joe',
              password:  "password")
