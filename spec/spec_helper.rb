@@ -3,10 +3,12 @@ require 'omniauth'
 OmniAuth.config.test_mode = true
 
 omniauth_hash = { 'uid' => "1234",
-                  'credentials' => 
+                  'credentials' =>
                     {'token' => "123456789" },
                   'extra' =>
+                  {'raw_info' =>
                     {'login' => "user"}
+                  }
                 }
 
 OmniAuth.config.add_mock(:github, omniauth_hash)
