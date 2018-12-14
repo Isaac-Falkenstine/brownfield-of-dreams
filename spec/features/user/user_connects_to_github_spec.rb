@@ -28,6 +28,7 @@ describe "User connects to GitHub" do
     expect(current_path).to eq(dashboard_path)
     expect(User.first.token).to eq("token 123456789")
     expect(User.first.github_id).to eq(1234)
+    expect(User.first.github_login).to eq("user")
 
   end
 

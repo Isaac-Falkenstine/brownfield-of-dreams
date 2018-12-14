@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       token = request.env["omniauth.auth"].credentials.token
       current_user.update_attribute(:token, "token #{token}")
       current_user.update_attribute(:github_id, request.env["omniauth.auth"].uid)
-      current_user.update_attribute(:github_login, request.env["omniauth.auth"].login)
+      current_user.update_attribute(:github_login, request.env["omniauth.auth"].extra.login)
     elsif request.env["PATH_INFO"] == "/auth/failure"
       flash[:error] = "Authentication failed"
     end
