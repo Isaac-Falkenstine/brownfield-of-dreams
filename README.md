@@ -1,3 +1,5 @@
+<a href="https://codeclimate.com/github/Isaac-Falkenstine/brownfield-of-dreams/maintainability"><img src="https://api.codeclimate.com/v1/badges/fb4a7d5a34dd60e1e5d6/maintainability" /></a>
+
 # Brownfield Of Dreams
 
 This is the base repo for a brownfield project used at Turing for Backend Mod 3.
