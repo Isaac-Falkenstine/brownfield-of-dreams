@@ -31,7 +31,7 @@
               user_friendships_path(user_id: @facade.id,
                                     followed_id: follower.user_id),
               method: :post,
-              class: "add-friend" if follower.user_id %>
+              class: "add-friend" if follower.user_id && !@facade.friend?(follower)  %>
           </li>
         <% end %>
       </ul>
@@ -45,7 +45,7 @@
               user_friendships_path(user_id: @facade.id,
                                     followed_id: following.user_id),
               method: :post,
-              class: "add-friend" if following.user_id %>
+              class: "add-friend" if following.user_id && !@facade.friend?(following) %>
           </li>
         <% end %>
       </ul>

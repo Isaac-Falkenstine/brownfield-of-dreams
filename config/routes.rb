@@ -40,7 +40,8 @@ Rails.application.routes.draw do
   post '/invitation', to: 'invite#create'
 
   resources :users, only: [:new, :create, :update, :edit] do
-    resources :friendships, only: [:create]
+    get '/friendships', to: "friendships#create"
+    post '/friendships', to: "friendships#create"
     get '/activate', to: 'users#confirm_email'
   end
 

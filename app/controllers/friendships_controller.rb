@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+
   def create
     follower = User.find(friendship_params[:user_id])
     followed = User.find(friendship_params[:followed_id])
