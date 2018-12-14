@@ -1,5 +1,7 @@
 class UserDashboardFacade
 
+  attr_reader :user
+
   def initialize(user)
     @user = user
   end
@@ -68,9 +70,14 @@ class UserDashboardFacade
     user ? user.id : nil
   end
 
-    private
+  def friend?(github_user)
+    id_array = user.friends.map do |friend|
+      friend.id
+    end
+    id_array.include?(github_user.user_id)
+  end
 
-    attr_reader :user
+    private
 
     def repository_fetch_result
       @repository_fetch_result ||= service.repos_json
